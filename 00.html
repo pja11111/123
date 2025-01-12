@@ -1,0 +1,149 @@
+<!-- <!DOCTYPE html>
+<html>
+<body>
+    <title>2d</title>
+    <script>
+        const lang = [
+            { id: 1, status: 'ACTIVE', lang: 'Dush' },
+            { id: 2, status: 'INVITED', lang: 'Thai' },
+            { id: 3, status: 'INVITED', lang: 'English' },
+            { id: 4, status: 'DELETE', lang: 'Dush' },
+            { id: 5, status: 'DELETE', lang: 'Thai' },
+            { id: 6, status: 'INVITED', lang: 'English' },
+            { id: 7, status: 'ACTIVE', lang: 'Dush' },
+            { id: 8, status: 'SUSPENDED', lang: 'English' },
+            { id: 9, status: 'ACTIVE', lang: 'Thai' },
+            { id: 10, status: 'ACTIVE', lang: 'Dush' },
+            { id: 11, status: 'SUSPENDED', lang: 'English' },
+            { id: 12, status: 'ACTIVE', lang: 'English' },
+            { id: 13, status: 'DELETE', lang: 'Thai' },
+            { id: 14, status: 'ACTIVE', lang: 'English' },
+            { id: 15, status: 'DELETE', lang: 'Dush' },
+        ];
+    
+        const cell = 10 * 10; // ตาราง 10x10
+        const expandedLang = [...lang]; // สำเนาอาร์เรย์ lang
+     
+        // เพิ่มข้อมูลใน expandedLang ให้ครบ 100 เซลล์
+        for (let i = lang.length; i < cell; i++) {
+            if (i === 15) {
+                expandedLang[i] = { id: 16, status: 'SUSPENDED', lang: 'Japan' };
+            } else if (i === 16) {
+                expandedLang[i] = { id: 17, status: 'DELETE', lang: 'China' };
+            } else if (i === 17) {
+                expandedLang[i] = { id: 18, status: 'DELETE', lang: 'Poland' };
+            } else if (i >= 20 && i <= 30) {
+                expandedLang[i] = { id: i + 1, status: 'ACTIVE', lang: 'France' };
+            } 
+        }
+    
+        // สร้างตาราง 2 มิติ
+        const twoDarray = create2DTable(cell, expandedLang);
+    
+        function create2DTable(size, data) {
+            let table = [];
+            for (let x = 0; x < 10; x++) {
+                let row = [];
+                for (let y = 0; y < 10; y++) {
+                    // คำนวณตำแหน่งใน expandedLang
+                    let index = x * 10 + y+1;
+                    let obj = data[index];
+                    if (obj) {
+                        row.push(obj.lang); // ใช้เฉพาะค่า lang
+                    } else {
+                        row.push(`[${x},${y}]`); // แสดงตำแหน่งถ้าไม่มีข้อมูล
+                    }
+                }
+                table.push(row);
+            }
+            return table;
+        }
+    
+        // แสดงผลเป็นตารางในคอนโซล
+        console.table(twoDarray);
+    
+        // ตัวอย่างการเข้าถึงค่าจากตาราง
+        const x = 5;
+        const y = 5;
+        const cellValue = twoDarray[x][y];
+        console.log(cellValue);
+    </script>
+    
+</body> -->
+<!-- </html> -->
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>2D Table</title>
+</head>
+<body>
+    <script>
+        const lang = [
+            { id: 596, status: 'ACTIVE', lang: 'Dush' },
+            { id: 6879, status: 'INVITED', lang: 'Thai' },
+            { id: 6069, status: 'INVITED', lang: 'English' },
+            { id: 576, status: 'DELETE', lang: 'Dush' },
+            { id: 38, status: 'DELETE', lang: 'Thai' },
+            { id: 697, status: 'INVITED', lang: 'English' },
+            { id: 504, status: 'ACTIVE', lang: 'Dush' },
+            { id: 5869, status: 'SUSPENDED', lang: 'English' },
+            { id: 584, status: 'ACTIVE', lang: 'Thai' },
+            { id: 410, status: 'ACTIVE', lang: 'Dush' },
+            { id: 561, status: 'SUSPENDED', lang: 'English' },
+            { id: 112, status: 'ACTIVE', lang: 'English' },
+            { id: 7163, status: 'DELETE', lang: 'Thai' },
+            { id: 3314, status: 'ACTIVE', lang: 'English' },
+            { id: 7815, status: 'DELETE', lang: 'Dush' },
+        ];
+
+        
+        const twoDarray = create2DTable();
+        function create2DTable() {
+            let table = [];
+            for (let x = 0; x < 10; x++) {
+            let row = [];
+            for (let y = 0; y < 10; y++) {
+                    // คำนวณ id ของออบเจกต์ในอาร์เรย์ lang
+                let indexXY = x * 10 + y ;
+                
+
+                // let obj = lang.find((item,index) => {
+                //     console.log("index",index)
+                //     console.log("itemid",item.id)
+                //     item.index === indexXY});
+                // console.log(obj)
+
+          
+                console.log("indexXY",indexXY)
+                let obj = lang.find((item,index) => 
+                index === indexXY);
+                console.log(obj)
+                    
+                if (obj) {
+                     row.push(obj.lang);  // ใช้แค่ค่า lang จากออบเจกต์
+                    //  row.push(`${obj.lang} ${obj.status}`);
+                } else {
+                     row.push(${x}, ${y});  // ถ้าไม่มีข้อมูลแสดงตำแหน่ง
+                } 
+                }
+                table.push(row);
+            }
+            return table;
+        }
+    
+        // แสดงผลเป็นตารางในคอนโซล
+        console.table(twoDarray);
+        console.log("twoDarray",twoDarray)
+
+        const x = 5;
+        const y = 5;
+        const celltable = twoDarray[x][y];
+        console.log("celltable",celltable);
+
+
+
+    </script>
+</body>
+</html>

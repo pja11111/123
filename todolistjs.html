@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- กำหนดชุดตัวอักษรเป็น UTF-8 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- ทำให้เว็บไซต์แสดงผลได้ดีในหน้าจอทุกขนาด -->
+    <title>To-Do List</title>
+    <!-- ตั้งชื่อหน้าต่างเว็บเบราว์เซอร์ -->
+    <style>
+      /* การตั้งค่าทั่วไปสำหรับ body เพื่อจัดกึ่งกลางหน้า */
+      body {
+        font-family: "Arial", sans-serif; /* กำหนดรูปแบบตัวอักษร */
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(
+          135deg,
+          #f8fafc,
+          #3215d8
+        ); /* สีพื้นหลังแบบไล่ระดับ */
+        height: 100vh; /* กำหนดความสูงของหน้าให้เต็มจอ */
+        display: flex; /* ใช้ Flexbox เพื่อจัดตำแหน่ง */
+        align-items: center; /* จัดแนวตั้งให้อยู่กึ่งกลาง */
+        justify-content: center; /* จัดแนวนอนให้อยู่กึ่งกลาง */
+      }
+
+      /* การตั้งค่ากล่องที่แสดงเนื้อหา */
+      .container {
+        background-color: white; /* สีพื้นหลังของกล่อง */
+        padding: 20px 30px; /* ระยะห่างด้านใน */
+        border-radius: 10px; /* มุมกล่องโค้ง */
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* เงาของกล่อง */
+        width: 400px; /* ความกว้างของกล่อง */
+        text-align: center; /* จัดข้อความให้อยู่กลาง */
+      }
+
+      /* การตั้งค่าสำหรับหัวข้อ */
+      h1 {
+        margin-bottom: 20px; /* ระยะห่างด้านล่างของหัวข้อ */
+        font-size: 24px; /* ขนาดตัวอักษร */
+        color: #333; /* สีตัวอักษร */
+      }
+
+      /* การจัดการ Input Group */
+      .input-group {
+        display: flex; /* ใช้ Flexbox เพื่อจัดการ Input และปุ่ม */
+        justify-content: center; /* จัดให้อยู่กลาง */
+        margin-bottom: 20px; /* ระยะห่างด้านล่าง */
+      }
+
+      /* การตั้งค่าช่อง Input */
+      .input-group input {
+        width: 60%; /* กำหนดความกว้างของช่อง Input */
+        padding: 10px; /* ระยะห่างด้านใน */
+        margin-right: 5px; /* ระยะห่างด้านขวาของช่อง */
+        border: 1px solid #ccc; /* ขอบของช่อง */
+        border-radius: 5px; /* มุมขอบโค้ง */
+        font-size: 14px; /* ขนาดตัวอักษรในช่อง */
+      }
+
+      /* การตั้งค่าปุ่ม Add Task */
+      #addTask {
+        padding: 10px 20px; /* ระยะห่างด้านในปุ่ม */
+        border: none; /* ไม่มีเส้นขอบ */
+        border-radius: 5px; /* มุมโค้ง */
+        background-color: #4caf50; /* สีพื้นหลัง */
+        color: white; /* สีตัวอักษร */
+        font-size: 14px; /* ขนาดตัวอักษร */
+        cursor: pointer; /* เปลี่ยนรูปเมาส์เป็นมือ */
+        transition: all 0.3s ease; /* เพิ่มเอฟเฟกต์การเปลี่ยนแปลง */
+      }
+
+      /* เอฟเฟกต์เมื่อเอาเมาส์ชี้ปุ่ม */
+      #addTask:hover {
+        background-color: #45a049; /* เปลี่ยนสีพื้นหลังเมื่อ hover */
+        transform: translateY(-2px); /* ขยับปุ่มขึ้นเล็กน้อย */
+      }
+
+      /* การตั้งค่ารายการใน To-Do List */
+      ul {
+        list-style-type: none; /* ซ่อนจุดหัวข้อ */
+        padding: 0; /* ไม่เว้นระยะขอบ */
+        margin: 0; /* ไม่เว้นระยะขอบ */
+      }
+
+      /* การตั้งค่ารายการแต่ละอัน */
+      li {
+        margin-bottom: 10px; /* ระยะห่างด้านล่างของรายการ */
+        padding: 10px; /* ระยะห่างด้านใน */
+        background-color: #f4f4f4; /* สีพื้นหลัง */
+        border-radius: 5px; /* มุมกล่องโค้ง */
+        display: flex; /* ใช้ Flexbox จัดการเนื้อหา */
+        justify-content: space-between; /* จัดให้อยู่คนละฝั่ง */
+        align-items: center; /* จัดแนวให้อยู่กึ่งกลาง */
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* เงาของกล่อง */
+        transition: all 0.3s ease; /* เอฟเฟกต์การเปลี่ยนแปลง */
+      }
+
+      /* เอฟเฟกต์เมื่อเอาเมาส์ชี้รายการ */
+      li:hover {
+        background-color: #e8f0fe; /* เปลี่ยนสีพื้นหลังเมื่อ hover */
+        transform: translateY(-2px); /* ขยับขึ้นเล็กน้อย */
+      }
+
+      /* การตั้งค่าปุ่ม Delete */
+      .deleteTask {
+        padding: 5px 10px; /* ระยะห่างด้านในปุ่ม */
+        border: none; /* ไม่มีเส้นขอบ */
+        border-radius: 5px; /* มุมโค้ง */
+        background-color: #ff6b6b; /* สีพื้นหลัง */
+        color: white; /* สีตัวอักษร */
+        font-size: 14px; /* ขนาดตัวอักษร */
+        cursor: pointer; /* เปลี่ยนเมาส์เป็นรูปมือ */
+        transition: all 0.3s ease; /* เพิ่มเอฟเฟกต์ */
+      }
+
+      /* เอฟเฟกต์เมื่อเอาเมาส์ชี้ปุ่ม Delete */
+      .deleteTask:hover {
+        background-color: #e63946; /* เปลี่ยนสีปุ่มเมื่อ hover */
+        transform: scale(1.1); /* ขยายปุ่มเล็กน้อย */
+      }
+
+      /* เอฟเฟกต์เมื่อคลิกในช่อง Input */
+      input:focus {
+        outline: none; /* ซ่อนเส้นขอบสีฟ้า */
+        border-color: #4caf50; /* เปลี่ยนสีขอบ */
+        box-shadow: 0 0 5px rgba(76, 175, 80, 0.5); /* เพิ่มเงาสีเขียว */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>To-Do List</h1>
+      <!-- ชื่อแอปพลิเคชัน -->
+      <div class="input-group">
+        <input type="text" id="taskNameInput" placeholder="Task Name" />
+        <!-- ช่องกรอกชื่อ Task -->
+        <input
+          type="text"
+          id="taskDescriptionInput"
+          placeholder="Description"
+        />
+        <!-- ช่องกรอกคำอธิบาย Task -->
+        <button id="addTask">Add</button>
+        <!-- ปุ่มเพิ่ม Task -->
+      </div>
+      <ul id="taskList"></ul>
+      <!-- รายการ Task จะถูกเพิ่มที่นี่ -->
+    </div>
+    <script>
+      const addButton = document.getElementById("addTask"); // ดึงปุ่ม Add Task
+      const taskNameInput = document.getElementById("taskNameInput"); // ดึงช่องใส่ชื่อ Task
+      const taskDescriptionInput = document.getElementById(
+        "taskDescriptionInput"
+      ); // ดึงช่องใส่คำอธิบาย Task
+      const taskList = document.getElementById("taskList"); // ดึง ul สำหรับแสดง Task
+
+      loadTasks(); // โหลด Task จาก LocalStorage
+
+      function addTask() {
+        const taskName = taskNameInput.value.trim(); // อ่านชื่อ Task และตัดช่องว่าง
+        const taskDescription = taskDescriptionInput.value.trim(); // อ่านคำอธิบาย Task และตัดช่องว่าง
+
+        if (taskName && taskDescription) {
+          // ตรวจสอบว่ามีข้อมูลครบ
+          createTaskElement(taskName, taskDescription); // สร้างรายการใหม่
+          taskNameInput.value = ""; // ล้างช่องชื่อ Task
+          taskDescriptionInput.value = ""; // ล้างช่องคำอธิบาย
+          saveTasks(); // บันทึก Task ลง LocalStorage
+        } else {
+          alert("Please fill out both fields!"); // แจ้งเตือนถ้าข้อมูลไม่ครบ
+        }
+      }
+
+      addButton.addEventListener("click", addTask); // เพิ่ม Event ให้ปุ่ม Add
+
+      function createTaskElement(taskName, taskDescription) {
+        const listItem = document.createElement("li"); // สร้างรายการใหม่
+
+        const taskContent = document.createElement("span"); // สร้างข้อความ Task
+        taskContent.textContent = `${taskName}: ${taskDescription}`; // ใส่ข้อความ Task
+        listItem.appendChild(taskContent); // เพิ่มข้อความใน li
+
+        const deleteButton = document.createElement("button"); // สร้างปุ่ม Delete
+        deleteButton.textContent = "Delete"; // ตั้งชื่อปุ่ม
+        deleteButton.className = "deleteTask"; // ใส่คลาสให้ปุ่ม
+
+        listItem.appendChild(deleteButton); // เพิ่มปุ่มใน li
+        taskList.insertBefore(listItem, taskList.firstChild); // เพิ่ม Task ใหม่ด้านบนสุด
+
+        deleteButton.addEventListener("click", function () {
+          taskList.removeChild(listItem); // ลบรายการ Task
+          saveTasks(); // อัปเดต LocalStorage
+        });
+      }
+
+      function saveTasks() {
+        let tasks = []; // สร้างอาเรย์เก็บ Task
+        taskList.querySelectorAll("li").forEach(function (item) {
+          const taskContent = item.querySelector("span").textContent; // อ่านเนื้อหา Task
+          tasks.push(taskContent); // เก็บเนื้อหาในอาเรย์
+        });
+
+        localStorage.setItem("tasks", JSON.stringify(tasks)); // บันทึกใน LocalStorage
+      }
+
+      function loadTasks() {
+        const tasks = JSON.parse(localStorage.getItem("tasks")) || []; // ดึง Task จาก LocalStorage
+
+        tasks.forEach(function (taskContent) {
+          const [taskName, taskDescription] = taskContent.split(": "); // แยกชื่อและคำอธิบาย
+          createTaskElement(taskName, taskDescription); // สร้างรายการ
+        });
+      }
+    </script>
+  </body>
+</html>

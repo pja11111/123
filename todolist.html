@@ -1,0 +1,276 @@
+<!-- <!DOCTYPE html>
+<html>
+    
+    <style>
+body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .header {
+      background-color: #f44336;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .header input {
+      width: 30%;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      margin-right: 5px;
+    }
+
+    .header button {
+      width: 20%;
+      padding: 10px;
+      background-color: #555;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      border-radius: 4px;
+    }
+
+    .header button:hover {
+      background-color: #444;
+    }
+
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    ul li {
+      background: #f9f9f9;
+      padding: 10px 15px;
+      border-bottom: 1px solid #ddd;
+      font-size: 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    ul li:nth-child(odd) {
+      background: #eee;
+    }
+
+    ul li.checked {
+      background: #888;
+      color: white;
+      text-decoration: line-through;
+    }
+
+    ul li .close {
+      cursor: pointer;
+      color: #888;
+      font-size: 18px;
+    }
+
+    ul li .close:hover {
+      color: red;
+    }
+    </style>
+<body>
+
+<script>
+
+
+
+
+</script>
+
+</body>
+</html> -->
+
+<!-- <!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    .header {
+      background-color: #49f436;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .header input {
+      width: 30%;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      margin-right: 5px;
+    }
+
+    .header button {
+      width: 20%;
+      padding: 10px;
+      background-color: #555;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      border-radius: 4px;
+    }
+
+    .header button:hover {
+      background-color: #444;
+    }
+
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    ul li {
+      background: #f9f9f9;
+      padding: 10px 15px;
+      border-bottom: 1px solid #ddd;
+      font-size: 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    ul li:nth-child(odd) {
+      background: #eee;
+    }
+
+    ul li.checked {
+      background: #888;
+      color: white;
+      text-decoration: line-through;
+    }
+
+    ul li .close {
+      cursor: pointer;
+      color: #888;
+      font-size: 18px;
+    }
+
+    ul li .close:hover {
+      color: red;
+    }
+
+    .task-content {
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+}
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <h2>My To Do List</h2>
+  <input type="text" id="taskTitle" placeholder="Task Title...">
+  <input type="text" id="taskDescription" placeholder="Task Description...">
+  <button onclick="addTask()">Add</button>
+</div>
+
+<ul id="taskList"></ul>
+
+<script>
+  // Function to add a new task
+  function addTask() {
+    const taskTitleInput = document.getElementById("taskTitle");
+    const taskDescriptionInput = document.getElementById("taskDescription");
+    const taskTitle = taskTitleInput.value.trim();
+    const taskDescription = taskDescriptionInput.value.trim();
+
+    if (taskTitle === "" || taskDescription === "") {
+      alert("Please enter both title and description!");
+      return;
+    }
+
+    const taskList = document.getElementById("taskList");
+    const li = document.createElement("li");
+
+    li.innerHTML = `<span class="task-content"><strong>${taskTitle}</strong> ${taskDescription}</span><span class="close" onclick="removeTask(this)">×</span>`;
+
+
+    li.addEventListener("click", function (event) {
+      if (event.target.tagName !== "SPAN" || !event.target.classList.contains("close")) {
+        this.classList.toggle("checked");
+      }
+    });
+
+    // Add the new task to the top of the list
+    taskList.prepend(li);
+
+    // Clear the input fields
+    taskTitleInput.value = "";
+    taskDescriptionInput.value = "";
+  }
+
+  // Function to remove a task
+  function removeTask(closeButton) {
+    const task = closeButton.parentElement;
+    task.remove();
+  }
+</script>
+
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<style>
+
+    *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins',sans-serif;
+    }
+
+    .container{
+        width: 100%;
+        height: 100%;
+    }
+</style>
+<body>
+    <div class="container">
+        <div class="box">
+            <div class="todo-app">
+                <div class="title">
+                    <h2>รายการสิ่งที่ต้องทำ</h2>
+                    <img class="logo" src="logo.png" alt="Logo">
+                </div>
+                <div class="row">
+                    <input type="text" id="input-box" placeholder="เพิ่มข้อความของคุณ">
+                    <button onclick="addTask()">เพิ่มข้อความ</button>
+                </div>
+                <ul id="list-container" class="scroll">
+                    <!-- <li class="checked">งานที่ 1</li>
+                    <li>งานที่ 2</li>
+                    <li>งานที่ 3</li> -->
+                </ul>
+            </div>
+        </div>
+    </div>
+
+<script>
+ 
+
+
+
+</script>
+
+</body>
+</html>

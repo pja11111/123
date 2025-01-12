@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<script>
+// Object ที่เก็บข้อมูล
+const person = {
+  name: "John",
+  age: 30
+};
+
+// การเพิ่มข้อมูลใน Object โดยใช้ key ที่เป็นตัวเลข
+const nextIndex = Object.keys(person).length; // หาจำนวน keys ที่มีอยู่ใน Object
+person[1] = "New Item"; // เพิ่มข้อมูลใหม่ใน Object
+console.log(person); // { name: "John", age: 30, "2": "New Item" }
+
+
+
+// Object ที่เก็บข้อมูล
+const data = {
+  name: "Alice",
+  age: 25
+};
+
+// เพิ่มข้อมูลใหม่โดยไม่ระบุ key โดยใช้ index
+data[Object.keys(data).length] = "New Value";
+
+console.log(data); 
+// { name: "Alice", age: 25, "2": "New Value" }
+
+
+
+
+// การสร้าง Array
+let fruits = ["apple", "banana", "cherry"];
+
+// เพิ่มข้อมูลใหม่โดยใช้ .push()
+fruits.push("date");     //fruits.unshift("date"); ไป0        fruits.splice(1, 0, "date");ไปที่1
+
+console.log(fruits); 
+// Output: ["apple", "banana", "cherry", "date"]
+
+
+
+
+const a = [5]; // Array ที่มีค่า 5 ในตำแหน่ง index[0]
+
+// บวกค่าที่ index[0] กับ 5
+const result = a[0] + 5;
+
+console.log(result); // ผลลัพธ์: 10
+
+
+
+
+</script>
+
+</body>
+</html>

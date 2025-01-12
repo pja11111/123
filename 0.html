@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <title>2d</title>
+<script>
+const lang = [
+  { id: 1, status: 'ACTIVE', lang: 'Dush' },
+  { id: 2, status: 'INVITED', lang: 'Thai' },
+  { id: 3, status: 'INVITED', lang: 'English' },
+  { id: 4, status: 'DELETE', lang: 'Dush' },
+  { id: 5, status: 'DELETE', lang: 'Thai' },
+  { id: 6, status: 'INVITED', lang: 'English' },
+  { id: 7, status: 'ACTIVE', lang: 'Dush' },
+  { id: 8, status: 'SUSPENDED', lang: 'English' },
+  { id: 9, status: 'ACTIVE', lang: 'Thai' },
+  { id: 10, status: 'ACTIVE', lang: 'Dush' },
+  { id: 11, status: 'SUSPENDED', lang: 'English' },
+  { id: 12, status: 'ACTIVE', lang: 'English' },
+  { id: 13, status: 'DELETE', lang: 'Thai' },
+  { id: 14, status: 'ACTIVE', lang: 'English' },
+  { id: 15, status: 'DELETE', lang: 'Dush' },
+];
+
+console.log(lang)
+
+const DataLength = lang.length;
+const Cell = 10 * 10;
+const explandlang = [...lang];
+
+
+// for (let i = DataLength; i < Cell; i++) {
+//   if (i === 15) {
+//     explandlang[i] = { id: 16, status: 'SUSPENDED', lang: 'Japan' };
+//   } else if (i === 16) {
+//     explandlang[i] = { id: 17, status: 'DELETE', lang: 'China' };
+//   } else if (i === 17) {
+//     explandlang[i] = { id: 18, status: 'DELETE', lang: 'Poland' };
+// //   } else if (i >= 20 && i <= 30) { // ...... i .......
+// //     explandlang[i] = { id: i + 1, status: 'ACTIVE', lang: 'France' };
+//   }else if (i >= 20 && i <= 30) { // ...... i .......
+//     explandlang[i] = { id: i + 1, status: 'ACTIVE', lang: 'France' };
+//   } else {
+//     explandlang[i] = null; // เซ็ตเป็น null แทน default
+//     // explandlang[i] = { id: i + 1, status: "default", lang: "default" };
+//   }
+// }
+for (let i = DataLength; i < Cell; i++) {
+  explandlang[i] = null;
+}
+console.log("2", explandlang);
+
+// สร้างอาร์เรย์ 2 มิติ
+const twoDarray = [];
+for (let i = 0; i < explandlang.length; i += 10) {
+  const a = explandlang.slice(i, i + 10);
+  twoDarray.push(a);
+}
+
+// ฟังก์ชันฟอร์แมตรูปแบบข้อมูล
+function formatTwoDArrayWithIndex(twoDarray) {
+  const formatarray = [];
+  for (let i = 0; i < twoDarray.length; i++) {
+    const row = twoDarray[i];
+    const formatrow = [];
+    for (let j = 0; j < row.length; j++) {
+      const obj = row[j];
+      if (obj) {
+        // ฟอร์แมตข้อมูลเฉพาะเมื่อ obj มีค่า
+        const formatstring = obj.lang;
+        formatrow.push(formatstring);
+      } else {
+        // ถ้าไม่มีค่าให้แสดง index ในรูปแบบ [row,column]
+        formatrow.push(`[${i},${j}]`);
+      }
+    }
+    formatarray.push(formatrow);
+  }
+  return formatarray;
+}
+// function formatTwoDArrayWithIndex(twoDarray) {
+//   return twoDarray.map((row, i) => 
+//     row.map((obj, j) => 
+//       obj ? obj.lang : `[${i},${j}]`
+//     )
+//   );
+// }
+
+
+const formattableWithIndex = formatTwoDArrayWithIndex(twoDarray);
+console.table(formattableWithIndex);
+console.log(formattableWithIndex)
+
+
+const x = 7;
+const y = 0;
+const celltable = twoDarray[x] && twoDarray[x][y] ? twoDarray[x][y] : `[${x},${y}]`;
+const celltable1 = twoDarray[x][y];
+console.log(celltable);
+console.log(celltable1);
+</script>
+</body>
+</html>

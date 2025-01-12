@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<script>
+    const data = [66, 44, 23, 78, 90, 34, 89, 23, 90, 35];  // ข้อมูลต้นทางที่ต้องการสร้างตาราง
+
+    const result = create2DArray(data);  // เรียกฟังก์ชันเพื่อสร้างตาราง 2D จากข้อมูลใน data
+// ฟังก์ชันที่ใช้สร้างตาราง 2D
+function create2DArray(arr) {
+    let result = [];  // ตัวแปร result สำหรับเก็บผลลัพธ์สุดท้ายเป็นตาราง 2D
+    // let dataIndex = 0;  // ตัวแปร dataIndex ใช้เก็บตำแหน่งในการเข้าถึงข้อมูลใน arr
+
+    // ลูปภายนอกเพื่อสร้างแถวของตาราง
+    for (let x = 0; x < arr.length; x++) {
+        let row = [];  // แถวใหม่ที่ใช้เก็บข้อมูลในแต่ละตำแหน่งของแถว
+        // ลูปภายในเพื่อสร้างเซลล์ในแต่ละแถว
+        console.log("x",x)
+        for (let y = 0; y < arr.length; y++) {
+            console.log("y",y)
+            // if (dataIndex < arr.length) {
+            //     // ถ้ามีข้อมูลใน arr ยังเหลือให้แสดงค่าใน data ที่ตำแหน่ง dataIndex
+            //     row.push(`[${arr[dataIndex]}]`);  // เพิ่มค่าจาก data ในเซลล์
+            //     // dataIndex++;  // เลื่อนไปยังข้อมูลถัดไป
+            // } else {
+            //     // ถ้าไม่มีข้อมูลใน arr ให้แสดงตำแหน่ง [x, y] ในเซลล์
+            //     row.push(`[${x}, ${y}]`);  // แสดงตำแหน่งของเซลล์
+            // }
+            row.push(`[${arr[y]}]`);
+            // row.push(`[${x}, ${y}]`); 
+            // row.push(`[${arr[dataIndex]}]`); 
+            // dataIndex++
+        }
+        result.push(row);  // เพิ่มแถวที่สร้างเสร็จแล้วลงในตาราง result
+    }
+    return result;  // คืนค่าตาราง 2D ที่สร้างเสร็จแล้ว
+}
+
+console.table(result);  // แสดงผลตารางในคอนโซลในรูปแบบตาราง
+
+// ดึงค่าจากตำแหน่ง x = 0, y = 5 ของตาราง result
+const x = 0;
+const y = 5;
+const celltable = result[x][y];  // ดึงค่าจากตารางที่ตำแหน่ง [0][5]
+console.log(celltable);  // แสดงค่าของเซลล์ที่ดึงมา (เช่น '[34]')
+
+</script>
+
+</body>
+</html>
+
+
+
+<!-- // const data = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]; // ข้อมูลต้นทาง
+// const cell = 10 * 10; // ตารางขนาด 10x10
+
+// // สร้างอาร์เรย์ 2 มิติ
+// const result = [];
+// for (let row = 0; row < data.length; row++) { // ใช้ data เป็นจำนวนแถว
+//     const rowArray = [];
+//     for (let col = 0; col < data.length; col++) { // ใช้ data เป็นจำนวนคอลัมน์
+//         rowArray.push(`[${row},${col}]`); // ใส่ตำแหน่งในรูปแบบ [row,column]
+//     }
+//     result.push(rowArray);
+// }
+
+// // แสดงผลตารางในรูปแบบ console.table
+// console.table(result);
+
+// // ตัวอย่างการเข้าถึงค่าที่ตำแหน่ง [0,5]
+// const x = 0;
+// const y = 5;
+// const celltable = result[x][y];
+// console.log(celltable); // แสดงผลค่าที่ตำแหน่ง [0,5] -->

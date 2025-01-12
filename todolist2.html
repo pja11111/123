@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>List to do</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link />
+  </head>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: antiquewhite;
+    }
+
+    .container {
+      border: 1px solid rgba(0, 0, 0, 0.689);
+      width: 90%;
+      max-width: 544px;
+      position: absolute;
+      transform: translate(-50%, -50%);
+      top: 50%;
+      left: 50%;
+    }
+
+    #new-task {
+      position: relative;
+      background-color: white;
+      padding: 28.8px 16px;
+      border-radius: 0px;
+      box-shadow: 0 20px 28.8px rgb(1, 24, 48, 1.5);
+      display: grid;
+      grid-template-columns: 9fr 4fr; /* ตาราง9ส่วน4 */
+      gap: 10px;
+    }
+
+    #new-task input {
+      font-family: "Poppins", sans-serif;
+      font-size: 16px;
+      border: none;
+      border-bottom: 2px solid rgba(187, 86, 86, 0.633);
+      padding: 12.8px 8px; /* แปลงจาก em เป็น px */
+      color: black;
+      font-weight: 500;
+    }
+    #new-task input:focus {
+      outline: none;
+      border-color: rgba(187, 86, 86, 0.633);
+    }
+
+    #new-task button {
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-size: 16px;  /* แปลงจาก em เป็น px */
+    background-color: rgba(187, 86, 86, 0.633);
+    color: #ffffff;
+    outline: none;
+    border: none;
+    border-radius: 4.8px;  /* แปลงจาก em เป็น px */
+    cursor: pointer;
+    }
+
+
+    #task {
+      background-color: #ffffff;
+      position: relative;
+    }
+  </style>
+  <body>
+    <div class="container">
+      <div id="new-task">
+        <input type="text" placeholder="Enter The Task Here..." />
+        <button id="push">Add</button>
+      </div>
+      <div id="task"></div>
+    </div>
+
+    <script>
+      const newTaskInput = document.querySelector("#new-task input");
+      const tasksDiv = document.querySelector("#task");
+      let deleteTasks, editTask, tasks;
+      let updateNote = "";
+      let count;
+
+      //fucntion on window
+      window.onload = () => {
+        updateNote = "";
+        count = Object.keys(localStorage).length;
+        displayTasks();
+      }
+
+      //fucntion display to tasks
+      const displayTasks = () => {
+        if (Object.keys(localStorage).length > 0) {
+            tasksDiv.style.display = "inline-block";
+        } else {
+            tasksDiv.style.display = "none";
+        }
+
+        // clear task
+        tasksDiv.innerHTML = "";
+
+        //fectch all the key in locall storange
+        let task = Object.keys(localStorage);
+        let taskInnerDiv = document.createElement("div");
+        taskInnerDiv.classList.add("task");
+        taskInnerDiv.setAttribute("id", key);
+        // taskInnerDiv.innerHTML = `<span id="taskname">${key.split("_")[1]}</span>`;  //แบบสั้น
+        if (key && key.split("_").length > 1) {
+            taskInnerDiv.innerHTML = `<span id="taskname">${key.split("_")[1]}</span>`;
+        } else {
+            taskInnerDiv.innerHTML = `<span id="taskname">Invalid Task</span>`;
+        }
+
+        // localstorage wold store boolean as string so we parse it to boolean back
+        let editButton = document.createElement("button");
+        editButton.classList.add("edit");
+        editButton.innerHTML = `<i class="fa-regular fa-pen-to-square"></i>`;
+        if (!JSON.parse(value)) {
+            editButton.style.visibility = "visible"
+        } else {
+            editButton.style.visibility = "hidden"
+            taskInnerDiv.classList.add("completed")
+        }
+        taskInnerDiv.appendChild(editButton);
+        taskInnerDiv.innerHTML += `<button class ="delete"><i class="fa-solid fa-trash-arrow-up"></i></button>`;
+        taskDiv.appendChild(taskInnerDiv);
+
+   
+    }
+    //disible edit button
+    const disableButoons = (bool) => {
+        let editButtosn = document.getElementsByClassName("edit");
+        Array.form(editButtons).forEach(element => {})
+    };
+
+    </script>
+  </body>
+</html>

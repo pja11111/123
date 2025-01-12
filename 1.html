@@ -1,0 +1,216 @@
+<!-- <!DOCTYPE html>
+<html>
+<body>
+    <title>2d</title> 
+    <script>
+const lang = [
+  { id: 1, status: 'ACTIVE', lang: 'Dush' },
+  { id: 2, status: 'INVITED', lang: 'Thai' },
+  { id: 3, status: 'INVITED', lang: 'English' },
+  { id: 4, status: 'DELETE', lang: 'Dush' },
+  { id: 5, status: 'DELETE', lang: 'Thai' },
+  { id: 6, status: 'INVITED', lang: 'English' },
+  { id: 7, status: 'ACTIVE', lang: 'Dush' },
+  { id: 8, status: 'SUSPENDED', lang: 'English' },
+  { id: 9, status: 'ACTIVE', lang: 'Thai' },
+  { id: 10, status: 'ACTIVE', lang: 'Dush' },
+  { id: 11, status: 'SUSPENDED', lang: 'English' },
+  { id: 12, status: 'ACTIVE', lang: 'English' },
+  { id: 13, status: 'DELETE', lang: 'Thai' },
+  { id: 14, status: 'ACTIVE', lang: 'English' },
+  { id: 15, status: 'DELETE', lang: 'Dush' },
+];
+
+console.log("lang", lang);
+const DataLength = lang.length;
+const explandlang = [...lang];
+
+
+
+
+console.log("explandlang", explandlang);
+
+// สร้าง twoDarray ขนาด 10x10
+const twoDarray = [];
+for (let i = 0; i < 10; i++) {
+  const row = [];
+  for (let j = 0; j < 10; j++) {
+    const index = i * 10 + j;
+    if (index < explandlang.length) {
+      row.push(explandlang[index]);
+    } else {
+        row.push(`[${i},${j}]`); 
+    }
+  }
+  twoDarray.push(row);
+}
+console.log("twoDarray", twoDarray);
+
+// ฟอร์แมต twoDarray
+function formatTwoDArray(twoDarray) {
+  const formatarray = [];
+  for (let i = 0; i < twoDarray.length; i++) {
+    const row = twoDarray[i];
+    const formatrow = [];
+    for (let j = 0; j < row.length; j++) {
+      const obj = row[j];
+      const formatstring = typeof obj === 'object' ? obj.lang : obj;
+      formatrow.push(formatstring);
+    }
+    formatarray.push(formatrow);
+  }
+  return formatarray;
+}
+
+
+
+const formattable = formatTwoDArray(twoDarray);
+console.log("2D Array", formattable);
+console.table(formattable);
+
+// ตัวอย่างการเข้าถึงเซลล์ที่ต้องการ (เช่น x=0, y=5)
+const x = 2;
+const y = 9;
+const celltable = twoDarray[x][y];
+console.log(celltable);
+
+</script>  
+</body>
+</html> -->
+
+
+<!-- // // เพิ่มข้อมูลใน explandlang
+if (explandlang.length === 15) {
+  explandlang.push({ id: 16, status: 'SUSPENDED', lang: 'Japan' });
+}
+
+// เพิ่มข้อมูลเมื่อจำนวนสมาชิกใน explandlang น้อยกว่าหรือเท่ากับ 16
+if (explandlang.length === 16) {
+  explandlang.push({ id: 17, status: 'DELETE', lang: 'China' });
+}
+
+// เพิ่มข้อมูลสำหรับ id ตั้งแต่ 20 ถึง 30
+for (let i = 20;  i<= 30; i++) {
+  explandlang.push({ id: i + 1, status: 'ACTIVE', lang: 'France' });
+} -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+<body>
+    <title>2d</title> 
+
+
+
+<script>
+    const lang = [
+      { id: 1, status: 'ACTIVE', lang: 'Dush' },
+      { id: 2, status: 'INVITED', lang: 'Thai' },
+      { id: 3, status: 'INVITED', lang: 'English' },
+      { id: 4, status: 'DELETE', lang: 'Dush' },
+      { id: 5, status: 'DELETE', lang: 'Thai' },
+      { id: 6, status: 'INVITED', lang: 'English' },
+      { id: 7, status: 'ACTIVE', lang: 'Dush' },
+      { id: 8, status: 'SUSPENDED', lang: 'English' },
+      { id: 9, status: 'ACTIVE', lang: 'Thai' },
+      { id: 10, status: 'ACTIVE', lang: 'Dush' },
+      { id: 11, status: 'SUSPENDED', lang: 'English' },
+      { id: 12, status: 'ACTIVE', lang: 'English' },
+      { id: 13, status: 'DELETE', lang: 'Thai' },
+      { id: 14, status: 'ACTIVE', lang: 'English' },
+      { id: 15, status: 'DELETE', lang: 'Dush' },
+    ];
+    console.log("lang", lang);
+    const explandlang = [...lang];
+
+    for (let i = DataLength; i < Cell; i++) {
+          if (i === 15) {
+            explandlang[i] = { id: 16, status: 'SUSPENDED', lang: 'Japan' };
+          } else if (i === 16) {
+            explandlang[i] = { id: 17, status: 'DELETE', lang: 'China' };
+          } else if (i === 17) {
+            explandlang[i] = { id: 18, status: 'DELETE', lang: 'Poland' };
+          } else if (i >= 20 && i <= 30) {
+            explandlang[i] = { id: i + 1, status: 'ACTIVE', lang: 'France' };
+          } else {
+            explandlang[i] = { id: i + 1, status: "default", lang: "default" };
+          }
+        }
+    
+    // สร้างอาร์เรย์ 2 มิติขนาด 10x10 (เติมช่องว่างด้วยอ็อบเจ็กต์ที่ว่างเปล่าสำหรับข้อมูลที่หายไป)
+    const twoDarray = [];
+    for (let i = 0; i < 10; i++) {
+      const row = [];
+      for (let j = 0; j < 10; j++) {
+        const index = i * 10 + j;
+        // เพิ่มข้อมูลจากอาร์เรย์ lang หรือทิ้งช่องว่างถ้าเกินขนาด
+        if (index < explandlang.length) {
+          row.push(explandlang[index]);
+        } else {
+          row.push(`[${i},${j}]`);  // เติมช่องว่างด้วยตำแหน่ง [แถว, คอลัมน์]
+        }
+      }
+      twoDarray.push(row);
+    }
+    
+    // ฟอร์แมตอาร์เรย์ 2 มิติให้อยู่ในรูปแบบที่ต้องการ
+    // const formattable = formatTwoDArray(twoDarray);
+    
+    // function formatTwoDArray(twoDarray) {
+    //   const formatarray = [];
+    
+    //   // วนลูปแต่ละแถวในสองมิติ
+    //   for (let i = 0; i < twoDarray.length; i++) {
+    //     const row = twoDarray[i];
+    //     const formatrow = [];
+    
+    //     // วนลูปแต่ละอ็อบเจ็กต์ในแถว
+    //     for (let j = 0; j < row.length; j++) {
+    //       const obj = row[j];
+    //       const formatstring = obj.lang || obj;  // ถ้าไม่มีข้อมูล แสดงตำแหน่ง [แถว, คอลัมน์]
+    //       formatrow.push(formatstring);
+    //     }
+    
+    //     // เพิ่มแถวที่ฟอร์แมตแล้วลงในอาร์เรย์ผลลัพธ์
+    //     formatarray.push(formatrow);
+    //   }
+    
+    //   return formatarray;
+    // }
+    const formattable = formatTwoDArray(twoDarray);
+    function formatTwoDArray(twoDarray) {
+    return twoDarray.map(row => 
+        row.map(obj => obj.lang || obj)  // วนลูปแต่ละอ็อบเจ็กต์ในแถวและแสดง `lang` หรือใช้ค่าเดิม
+    );
+    }
+ 
+    
+    console.log("2D Array", formatTwoDArray(twoDarray));
+    console.table(formattable);
+    
+    // ตัวอย่างการเข้าถึงเซลล์ที่ต้องการ (เช่น x=0, y=5)
+    const x = 0;
+    const y = 5;
+    const celltable = twoDarray[x][y];
+    console.log(celltable);
+    </script>
+   
+</body>
+</html>
