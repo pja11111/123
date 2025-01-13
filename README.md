@@ -63,5 +63,38 @@
     renderTable(result);  // เรียกฟังก์ชันเพื่อแสดงตาราง
 </script>
 
+
+
+
+
+const result = create2DArray(data);  // เรียกฟังก์ชันเพื่อสร้างตาราง 2D จากข้อมูลใน data
+
+function create2DArray(arr) {
+    let result = [];  // ตัวแปร result สำหรับเก็บผลลัพธ์สุดท้ายเป็นตาราง 2D
+
+    // ลูปภายนอกเพื่อสร้างแถวของตาราง
+    for (let x = 0; x < arr.length; x++) {
+        let row = [];  // แถวใหม่ที่ใช้เก็บข้อมูลในแต่ละตำแหน่งของแถว
+        
+        // ลูปภายในเพื่อสร้างเซลล์ในแต่ละแถว
+        for (let y = 0; y < arr.length; y++) {
+            const index = x * arr.length + y;
+            const value = index < arr.length ? `[${arr[index]}]` : `[${x}, ${y}]`;
+            row.push(value); // เพิ่มค่าในแถว
+        }
+        result.push(row);  // เพิ่มแถวที่สร้างเสร็จแล้วลงในตาราง result
+    }
+
+    // กลับหัวแต่ละแถว (reverse) ของเซลล์
+    for (let i = 0; i < result.length; i++) {
+        result[i] = result[i].reverse();
+    }
+
+    return result;
+}
+
+console.table(result);  // แสดงผลตารางในคอนโซลในรูปแบบตาราง
+
+
 </body>
 </html>
